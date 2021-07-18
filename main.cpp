@@ -13,16 +13,32 @@ int main (int argc, char *argv[])
   wordmap words;
   string curstring;
   bool label = false;
-  ifstream infile ("D:/Qt/Praktika_1_Antipin/Test1.txt"); //указываем файл, из которого нужно удалить совпадения
-  fstream Output;
-  string Outfile = "D:/Qt/Praktika_1_Antipin/Test2.txt"; //указываем файл, куда нужно сохранить результат
-  Output.open(Outfile);
-  if( ! infile )
+  string input;
+  if(argc==2){
+      input = argv[1];
+  }
+  else {
+      cout<<"Enter file read ";  //указываем файл, из которого нужно удалить совпадения
+      cin>>input;
+  }
+  ifstream fileToRead;
+  fileToRead.open(input);
+  string Output;
+  if(argc==2){
+      Output = argv[1];
+  }
+  else {
+      cout<<"Enter file path "; //указываем файл, куда нужно сохранить результат
+      cin>>Output;
+  }
+  fstream fileToSave;
+  fileToSave.open(Output);
+  if( ! fileToRead )
      {
          cerr << "Error in opening file."; //в случае ошибки, сообщаем об этом пользователю
          return -1;
      }
-  while ( infile >> curstring )
+  while ( fileToRead >> curstring )
   {
       words[curstring]++; //С помощью цикла подсчитываем количество слов в файле
   }
@@ -42,7 +58,7 @@ int main (int argc, char *argv[])
                             <<         " word  :"
                             <<         (*it).first
                             <<         std::endl;
-                        Output << (*it).first<<endl; //Записываем совпадения в файл, только уже в единичном варианте
+                        fileToSave << (*it).first<<endl; //Записываем совпадения в файл, только уже в единичном варианте
 
                     }
           }
@@ -53,3 +69,4 @@ int main (int argc, char *argv[])
       system("pause");
       return 0;
 }
+
