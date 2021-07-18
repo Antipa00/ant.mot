@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> //вводим необходимые библиотеки
 #include <string>
 #include <map>
 #include <fstream>
@@ -13,10 +13,10 @@ int main (int argc, char *argv[])
   wordmap words;
   string curstring;
   bool label = false;
-  ifstream infile ("D:/Qt/Praktika_1_Antipin/Test1.txt");
+  ifstream infile ("D:/Qt/Praktika_1_Antipin/Test1.txt"); //Открываем исходный файл, в котором нужно найти и удалить совпадения
   if( ! infile )
      {
-         cerr << "Error in opening file.";
+         cerr << "Error in opening file."; //В случае ошибки выводим это для пользовал=теля
          return -1;
      }
   while ( infile >> curstring )
@@ -29,10 +29,10 @@ int main (int argc, char *argv[])
 
          for ( const_mapiter it = words.begin() ; it != words.end(); it++ )
           {
-              if ( (*it).second > 1 )
+              if ( (*it).second > 1 )  //проверяем наличие совпадений в файле
                     {
                         label = true;
-                        cout
+                        cout //в случаи нахождения совпадений выводим их пользователю
                             <<         " Occurs "
                             <<         (*it).second
                             <<         " times "
@@ -42,7 +42,7 @@ int main (int argc, char *argv[])
                     }
           }
 
-         if( ! label )
+         if( ! label ) // в случае, если совпадений нет, выводим это пользователю
             cout << " do not repeat.\n";
 
       return 0;
